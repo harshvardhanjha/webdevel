@@ -1,0 +1,59 @@
+<style>
+  .bgcolor{
+    margin: 0px !important;
+    padding: 5px !important;
+    height: 15%;
+    width: 100%;
+    background-color: #3b5998 !important;
+  }
+
+</style>
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- <h1>Please login</h1> -->
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+<meta name="google-signin-client_id" content="325756012392-eg9887bq19silrv8bieenigiqp78bg91.apps.googleusercontent.com">
+
+
+<div class="bgcolor">
+<form class="form-signin" role="form" method="post" action="">
+  {{ form.csrf_token }}
+  <img src = "{{ url_for('static', filename = 'the-forum-logo.png') }}" width="200" height="85" alt = "User" style = "width:250px;height:90px;">&nbsp;&nbsp;
+
+  <div style="float:right; margin:20px">
+  <p>
+    {{ form.username(placeholder="username") }}
+    <span class="error">
+      {% if form.username.errors %}
+        {% for error in form.username.errors %}
+          {{ error }}
+        {% endfor %}
+      {% endif %}
+    </span>
+ <!--  </p>
+  <p> -->
+  {{ form.password(placeholder="password") }}
+    <span class="error">
+      {% if form.password.errors %}
+        {% for error in form.password.errors %}
+          {{ error }}
+        {% endfor %}
+      {% endif %}
+    </span>
+    <button class="btn btn-xs btn-primary" align = "right" type="submit" style = "color:white">Sign in</button>
+  </p>
+  <!-- <button class="btn btn-sm btn-success" align = "right" type="submit">Sign in</button> -->
+  <!-- <p style = "color:white"> Not a member! <a href = "/register" style = "color:white"> Register </a> </p> -->
+</div>
+</form>
+</div>
+<div>
+    <div style="display: inline-block; height: 500px; padding:50px"><marquee direction="down"><h1> Trending Topics!! </h1></marquee></div>
+    <div style="display: inline-block; float:right; margin-right:160px">{% include "register.html" %}</div>
+    <div class="g-signin2" data-onsuccess="onSignIn">Sign in with google</div>
+</div>
+
+{% endblock %}

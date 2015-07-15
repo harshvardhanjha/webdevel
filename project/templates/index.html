@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+  .bgcolor{
+    margin: 0px !important;
+    padding: 5px !important;
+    height: 100px;
+    width: 100%;
+    background-color: #3b5998 !important;
+  }
+
+</style>
+<div class="bgcolor">
+<img src = "{{ url_for('static', filename = 'the-forum-logo.png') }}" width="200" height="85" alt = "User" style = "width:250px;height:90px;">&nbsp;&nbsp;
+<p style = "float:right; margin:10px"><img src = "{{ url_for('static', filename = 'user1.jpg') }}" width="200" height="85" alt = "User" style = "width:28px;height:18px;">&nbsp;&nbsp;
+<a href="/logout" style = "color:white">Profile&nbsp;&nbsp;</a><a href="/logout" style = "color:white">Logout</a></p>
+</div>
+<!-- post form -->
+<h3>Start a new disscusion!</h3>
+<br>
+<form class="form-message" role="form" method="post" action="/">
+  {{ form.csrf_token }}
+  <p>
+    {{ form.title(placeholder="title") }}
+    <span class="error">
+      {% if form.title.errors %}
+        {% for error in form.title.errors %}
+          {{ error }}
+        {% endfor %}
+      {% endif %}
+    </span>
+  </p>
+  <p>
+  {{ form.description(placeholder="description") }}
+    <span class="error">
+      {% if form.description.errors %}
+        {% for error in form.description.errors %}
+          {{ error }}
+        {% endfor %}
+      {% endif %}
+    </span>
+  </p>
+  <button class="btn btn-sm btn-success" type="submit">Post</button>
+</form>
+
+<!-- All posts -->
+<h3>Posts:</h3>
+{% for post in posts| sort(reverse = True, attribute = "id") %}
+  <strong>Title:</strong> {{ post.title }} <br>
+  <strong>Post:</strong> {{ post.description }} <br>
+  <strong>Author:</strong> {{ post.author.name }} <br>
+<br>
+{% endfor %}
+
+{% endblock %}
