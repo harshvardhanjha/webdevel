@@ -1,4 +1,3 @@
-
 from flask import flash, redirect, session, url_for, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
 from functools import wraps
