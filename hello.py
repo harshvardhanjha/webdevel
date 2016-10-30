@@ -7,9 +7,6 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from functools import wraps
 import config
 
-##########################
-#### helper functions ####
-##########################
 
 
 def login_required(test):
