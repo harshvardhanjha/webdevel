@@ -20,9 +20,6 @@ def login_required(test):
     return wrap
 
 
-################
-#### routes ####
-################
 
 # use decorators to link the function to a url
 @app.route('/')
